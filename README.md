@@ -48,6 +48,7 @@ Plugin commands are namespaced: `/agent-team-prompts:team-review`. With `--plugi
 
 | Command | Description | Teammates | Use When |
 |---------|-------------|-----------|----------|
+| `team-plan` | Implementation planning from Figma + requirements | 2-5 | New feature implementation with Figma designs |
 | `team-review` | Parallel code review | 2 / 3 / 5 | PR review, branch review |
 | `team-debug` | Competing hypothesis debugging | 2 / 3 / 5 | Bugs with unclear root cause |
 | `team-impact` | Change impact analysis | 3 | Before modifying shared code |
@@ -67,7 +68,7 @@ Plugin commands are namespaced: `/agent-team-prompts:team-review`. With `--plugi
 ### With arguments
 
 ```
-/agent-team-prompts:team-review PR #142
+/agent-team-prompts:team-plan https://www.figma.com/file/abc123 Implement user profile screen for iOS
 /agent-team-prompts:team-debug App crashes after background resume
 /agent-team-prompts:team-impact Renaming UserService.login() to UserService.authenticate()
 /agent-team-prompts:team-adr State management: Redux vs Zustand vs Jotai
@@ -80,6 +81,7 @@ Plugin commands are namespaced: `/agent-team-prompts:team-review`. With `--plugi
 /agent-team-prompts:team-deps Full dependency security and license audit
 /agent-team-prompts:team-perf Profile screen takes 3+ seconds to load
 /agent-team-prompts:team-compliance Check onboarding flow for App Store submission
+/agent-team-prompts:team-plan https://www.figma.com/file/abc123 Implement user profile screen for iOS
 ```
 
 ### Without arguments
@@ -87,6 +89,9 @@ Plugin commands are namespaced: `/agent-team-prompts:team-review`. With `--plugi
 All commands support interactive mode. Run the command without arguments and it will ask clarifying questions via `AskUserQuestion`.
 
 ```
+/agent-team-prompts:team-plan
+→ Asks: Figma URL, requirements, tech stack, complexity
+
 /agent-team-prompts:team-review
 → Asks: review scale (2/3/5 reviewers), base branch
 
@@ -128,6 +133,33 @@ All commands support interactive mode. Run the command without arguments and it 
 ```
 
 ## Command Details
+
+### `/team-plan` — Implementation Planning from Figma
+
+Takes a Figma design URL and requirements, analyzes the design and codebase, produces a detailed implementation plan, then forms an agent team to execute it.
+
+**Workflow (3-phase pipeline):**
+
+| Phase | Description |
+|-------|-------------|
+| Plan | Analyze Figma design + codebase → generate implementation plan with team composition |
+| Approve | User reviews the plan → approve, modify, or stop |
+| Execute | Auto-create agent team → teammates implement with plan approval required |
+
+**Figma analysis:** Uses the `/figma:implement-design` skill when available, falls back to WebFetch, then manual description.
+
+**Team auto-composition:**
+
+| Complexity | Teammates | Roles |
+|------------|-----------|-------|
+| Simple UI | 2 | UI Developer, Test Writer |
+| Feature with logic | 3 | UI Developer, Feature Developer, Test Writer |
+| Complex feature | 4 | UI + Feature + Data Layer + Test |
+| Large feature | 5 | UI + Feature + Data + Test + Reviewer |
+
+**Key feature:** Each teammate must submit their implementation plan to the lead for approval before writing code (`plan_mode_required`). File ownership is strictly non-overlapping to prevent conflicts.
+
+**Output:** Implementation plan (component breakdown, module structure, task list), then implementation summary with all files changed.
 
 ### `/team-review` — Parallel Code Review
 
