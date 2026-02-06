@@ -1,6 +1,6 @@
 # Agent Team Prompts
 
-Claude Code [Agent Teams](https://code.claude.com/docs/en/agent-teams) plugin with 7 slash commands for parallel workflows.
+Claude Code [Agent Teams](https://code.claude.com/docs/en/agent-teams) plugin with 13 slash commands for parallel workflows.
 
 ## Prerequisites
 
@@ -32,6 +32,12 @@ claude plugin add /path/to/agent-team-prompts
 | `/team-refactor` | Parallel module refactoring | 2-4 | Cross-module refactoring |
 | `/team-test` | Parallel test generation | 3-4 | Expanding test coverage |
 | `/team-research` | Feature design research | 2-3 | Pre-implementation research |
+| `/team-migrate` | Migration planning | 3 | Large-scale codebase migration |
+| `/team-postmortem` | Incident post-mortem | 3 | After production incidents |
+| `/team-api-design` | API design review | 3 | Designing or reviewing APIs |
+| `/team-deps` | Dependency audit | 3 | Security, license, freshness check |
+| `/team-perf` | Performance investigation | 3 / 5 | Diagnosing performance issues |
+| `/team-compliance` | Compliance & guidelines check | 3-5 | HIG, accessibility, App Store, privacy |
 
 ## Usage
 
@@ -45,6 +51,12 @@ claude plugin add /path/to/agent-team-prompts
 /team-refactor Migrate auth module to Clean Architecture
 /team-test Payment module test coverage
 /team-research Implement push notification deep linking
+/team-migrate UIKit to SwiftUI migration for Settings module
+/team-postmortem Login failure incident on 2024-01-15 release
+/team-api-design Review PaymentService public API surface
+/team-deps Full dependency security and license audit
+/team-perf Profile screen takes 3+ seconds to load
+/team-compliance Check onboarding flow for App Store submission
 ```
 
 ### Without arguments
@@ -72,6 +84,24 @@ All commands support interactive mode. Run the command without arguments and it 
 
 /team-research
 → Asks: feature description, research depth (quick/deep)
+
+/team-migrate
+→ Asks: migration type, scope, constraints
+
+/team-postmortem
+→ Asks: incident description, time range, severity
+
+/team-api-design
+→ Asks: API scope, API type, current state
+
+/team-deps
+→ Asks: audit scope, priority focus (security/license/freshness)
+
+/team-perf
+→ Asks: symptom, affected area, investigation scope (3/5 investigators)
+
+/team-compliance
+→ Asks: check scope, compliance domains (HIG/accessibility/App Store/privacy)
 ```
 
 ## Command Details
@@ -129,6 +159,52 @@ Writers create different test types in parallel while an Edge Case Explorer revi
 Internal code analyst and external researcher work in parallel. In deep mode, a designer synthesizes both into an architecture proposal.
 
 **Output:** Reusable patterns found, external references, architecture proposal, file list, complexity estimate.
+
+### `/team-migrate` — Migration Planning
+
+Three analysts work in parallel: Compatibility Analyst classifies migratability, Risk Analyst assesses regression danger, and Migration Planner designs a phased rollout based on both analyses.
+
+**Supports:** Language, framework, architecture, and version migrations.
+
+**Output:** Compatibility assessment, risk matrix, phased migration plan with coexistence strategy.
+
+### `/team-postmortem` — Incident Post-Mortem
+
+Timeline Reconstructor traces events chronologically while Root Cause Analyst digs into the code changes. Prevention Strategist synthesizes both into actionable prevention measures.
+
+**Key feature:** Cross-verification between timeline and root cause to ensure the real cause is identified, not just the proximate one.
+
+**Output:** Event timeline, root cause with contributing factors, prioritized action items.
+
+### `/team-api-design` — API Design Review
+
+Consumer Advocate evaluates usability, Implementation Advocate assesses feasibility, and Consistency Reviewer checks against project conventions. Advocates debate trade-offs adversarially.
+
+**Supports:** Internal APIs (protocols/modules), REST/HTTP APIs, and SDK/Library APIs.
+
+**Output:** Usability/implementation/consistency assessments, recommended changes, unresolved trade-offs.
+
+### `/team-deps` — Dependency Audit
+
+Three auditors run in parallel: Security (CVEs, supply chain risk), License (compatibility, obligations), and Freshness (outdated packages, alternatives).
+
+**Output:** Per-dependency security/license/freshness ratings, prioritized action items, alternative recommendations.
+
+### `/team-perf` — Performance Investigation
+
+Investigators analyze different performance dimensions (CPU, Memory, I/O) and debate which area is the actual bottleneck. Broad mode adds Rendering and Concurrency specialists.
+
+**Key feature:** Adversarial debate forces investigators to prove their area is the real bottleneck with evidence.
+
+**Output:** Bottleneck identification with confidence levels, prioritized optimization recommendations.
+
+### `/team-compliance` — Compliance & Guidelines Check
+
+Domain-specific reviewers check against Apple HIG, Accessibility, App Store Guidelines, and/or Privacy requirements. A Synthesizer resolves cross-domain conflicts.
+
+**Supports:** Selective domain checking (choose which guidelines to verify).
+
+**Output:** Severity-rated findings by domain, cross-domain conflicts, prioritized action plan.
 
 ## When NOT to Use Agent Teams
 
