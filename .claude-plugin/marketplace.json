@@ -1,0 +1,17 @@
+{
+  "name": "agent-team-prompts",
+  "owner": {
+    "name": "okminlee"
+  },
+  "metadata": {
+    "description": "Agent Teams slash commands for parallel workflows"
+  },
+  "plugins": [
+    {
+      "name": "agent-team-prompts",
+      "source": "./",
+      "description": "Agent Teams slash commands for parallel code review, debugging, impact analysis, ADR, refactoring, testing, feature research, migration planning, post-mortem, API design review, dependency audit, performance investigation, and compliance check",
+      "version": "0.1.0"
+    }
+  ]
+}
