@@ -17,46 +17,69 @@ Enable Agent Teams in `~/.claude/settings.json`:
 
 ## Installation
 
-```bash
-claude plugin add /path/to/agent-team-prompts
+### From GitHub (recommended)
+
+```shell
+# 1. Add marketplace
+/plugin marketplace add OkminLee/agent-team-prompts
+
+# 2. Install plugin
+/plugin install agent-team-prompts@agent-team-prompts
 ```
+
+Or via CLI:
+
+```bash
+claude plugin marketplace add OkminLee/agent-team-prompts
+claude plugin install agent-team-prompts@agent-team-prompts
+```
+
+### Local (development / testing)
+
+```bash
+claude --plugin-dir /path/to/agent-team-prompts
+```
+
+> **Note:** `--plugin-dir` loads the plugin for the current session only. For permanent installation, use the marketplace method above.
 
 ## Commands
 
+Plugin commands are namespaced: `/agent-team-prompts:team-review`. With `--plugin-dir`, the same namespace applies.
+
 | Command | Description | Teammates | Use When |
 |---------|-------------|-----------|----------|
-| `/team-review` | Parallel code review | 2 / 3 / 5 | PR review, branch review |
-| `/team-debug` | Competing hypothesis debugging | 2 / 3 / 5 | Bugs with unclear root cause |
-| `/team-impact` | Change impact analysis | 3 | Before modifying shared code |
-| `/team-adr` | Architecture decision review | 3 | Choosing between tech options |
-| `/team-refactor` | Parallel module refactoring | 2-4 | Cross-module refactoring |
-| `/team-test` | Parallel test generation | 3-4 | Expanding test coverage |
-| `/team-research` | Feature design research | 2-3 | Pre-implementation research |
-| `/team-migrate` | Migration planning | 3 | Large-scale codebase migration |
-| `/team-postmortem` | Incident post-mortem | 3 | After production incidents |
-| `/team-api-design` | API design review | 3 | Designing or reviewing APIs |
-| `/team-deps` | Dependency audit | 3 | Security, license, freshness check |
-| `/team-perf` | Performance investigation | 3 / 5 | Diagnosing performance issues |
-| `/team-compliance` | Compliance & guidelines check | 3-5 | HIG, accessibility, App Store, privacy |
+| `team-review` | Parallel code review | 2 / 3 / 5 | PR review, branch review |
+| `team-debug` | Competing hypothesis debugging | 2 / 3 / 5 | Bugs with unclear root cause |
+| `team-impact` | Change impact analysis | 3 | Before modifying shared code |
+| `team-adr` | Architecture decision review | 3 | Choosing between tech options |
+| `team-refactor` | Parallel module refactoring | 2-4 | Cross-module refactoring |
+| `team-test` | Parallel test generation | 3-4 | Expanding test coverage |
+| `team-research` | Feature design research | 2-3 | Pre-implementation research |
+| `team-migrate` | Migration planning | 3 | Large-scale codebase migration |
+| `team-postmortem` | Incident post-mortem | 3 | After production incidents |
+| `team-api-design` | API design review | 3 | Designing or reviewing APIs |
+| `team-deps` | Dependency audit | 3 | Security, license, freshness check |
+| `team-perf` | Performance investigation | 3 / 5 | Diagnosing performance issues |
+| `team-compliance` | Compliance & guidelines check | 3-5 | HIG, accessibility, App Store, privacy |
 
 ## Usage
 
 ### With arguments
 
 ```
-/team-review PR #142
-/team-debug App crashes after background resume
-/team-impact Renaming UserService.login() to UserService.authenticate()
-/team-adr State management: Redux vs Zustand vs Jotai
-/team-refactor Migrate auth module to Clean Architecture
-/team-test Payment module test coverage
-/team-research Implement push notification deep linking
-/team-migrate UIKit to SwiftUI migration for Settings module
-/team-postmortem Login failure incident on 2024-01-15 release
-/team-api-design Review PaymentService public API surface
-/team-deps Full dependency security and license audit
-/team-perf Profile screen takes 3+ seconds to load
-/team-compliance Check onboarding flow for App Store submission
+/agent-team-prompts:team-review PR #142
+/agent-team-prompts:team-debug App crashes after background resume
+/agent-team-prompts:team-impact Renaming UserService.login() to UserService.authenticate()
+/agent-team-prompts:team-adr State management: Redux vs Zustand vs Jotai
+/agent-team-prompts:team-refactor Migrate auth module to Clean Architecture
+/agent-team-prompts:team-test Payment module test coverage
+/agent-team-prompts:team-research Implement push notification deep linking
+/agent-team-prompts:team-migrate UIKit to SwiftUI migration for Settings module
+/agent-team-prompts:team-postmortem Login failure incident on 2024-01-15 release
+/agent-team-prompts:team-api-design Review PaymentService public API surface
+/agent-team-prompts:team-deps Full dependency security and license audit
+/agent-team-prompts:team-perf Profile screen takes 3+ seconds to load
+/agent-team-prompts:team-compliance Check onboarding flow for App Store submission
 ```
 
 ### Without arguments
@@ -64,43 +87,43 @@ claude plugin add /path/to/agent-team-prompts
 All commands support interactive mode. Run the command without arguments and it will ask clarifying questions via `AskUserQuestion`.
 
 ```
-/team-review
+/agent-team-prompts:team-review
 → Asks: review scale (2/3/5 reviewers), base branch
 
-/team-debug
+/agent-team-prompts:team-debug
 → Asks: symptom description, hypothesis mode (manual/auto), investigator count
 
-/team-impact
+/agent-team-prompts:team-impact
 → Asks: change target, change description
 
-/team-adr
+/agent-team-prompts:team-adr
 → Asks: decision topic, options, constraints
 
-/team-refactor
+/agent-team-prompts:team-refactor
 → Asks: goal, scope, teammate count, path assignments
 
-/team-test
+/agent-team-prompts:team-test
 → Asks: target scope, test types, framework preference
 
-/team-research
+/agent-team-prompts:team-research
 → Asks: feature description, research depth (quick/deep)
 
-/team-migrate
+/agent-team-prompts:team-migrate
 → Asks: migration type, scope, constraints
 
-/team-postmortem
+/agent-team-prompts:team-postmortem
 → Asks: incident description, time range, severity
 
-/team-api-design
+/agent-team-prompts:team-api-design
 → Asks: API scope, API type, current state
 
-/team-deps
+/agent-team-prompts:team-deps
 → Asks: audit scope, priority focus (security/license/freshness)
 
-/team-perf
+/agent-team-prompts:team-perf
 → Asks: symptom, affected area, investigation scope (3/5 investigators)
 
-/team-compliance
+/agent-team-prompts:team-compliance
 → Asks: check scope, compliance domains (HIG/accessibility/App Store/privacy)
 ```
 
