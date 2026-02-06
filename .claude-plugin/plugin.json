@@ -1,0 +1,16 @@
+{
+  "name": "agent-team-prompts",
+  "version": "0.1.0",
+  "description": "Agent Teams slash commands for parallel code review, debugging, impact analysis, ADR, refactoring, testing, and feature research",
+  "author": {
+    "name": "okminlee"
+  },
+  "license": "MIT",
+  "keywords": [
+    "agent-teams",
+    "code-review",
+    "debugging",
+    "refactoring",
+    "parallel"
+  ]
+}
