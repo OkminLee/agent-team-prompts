@@ -10,8 +10,8 @@
     {
       "name": "agent-team-prompts",
       "source": "./",
-      "description": "Agent Teams slash commands for parallel code review, debugging, impact analysis, ADR, refactoring, testing, feature research, migration planning, post-mortem, API design review, dependency audit, performance investigation, and compliance check",
-      "version": "0.1.0"
+      "description": "Agent Teams slash commands for implementation planning, parallel code review, debugging, impact analysis, ADR, refactoring, testing, feature research, migration planning, post-mortem, API design review, dependency audit, performance investigation, and compliance check",
+      "version": "0.2.0"
     }
   ]
 }
